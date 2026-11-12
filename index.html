@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="my" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>မင်္ဂလာဧည့်ခံပွဲ ဖိတ်ကြားလွှာ</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- SwiperJS CSS for Carousel Effect -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            themeColor: '#4A7C59',
+            themeBg: '#F9F6F0',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Font Registration */
+    @font-face {
+      font-family: 'CustomFont';
+      src: url('font/fontone.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      font-family: 'CustomFont', sans-serif;
+      background-color: #F9F6F0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 24 24' fill='%234A7C59' opacity='0.05'%3E%3Cpath d='M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C15,20 20,13 20,8Z'/%3E%3C/svg%3E");
+    }
+
+    /* Swiper Coverflow Customization */
+    .swiper {
+      width: 100%;
+      padding-top: 40px !important;
+      padding-bottom: 40px !important;
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+      overflow: hidden;
+    }
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 200px;
+      height: 280px;
+      filter: brightness(0.6);
+      transition: all 0.4s ease;
+      border-radius: 1.5rem !important;
+      overflow: hidden !important;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    .swiper-slide-active {
+      filter: brightness(1);
+      transform: scale(1.12);
+      z-index: 10;
+      border-radius: 1.5rem !important;
+      overflow: hidden !important;
+    }
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 1.5rem !important;
+    }
+
+    /* Custom Pagination Dots */
+    .swiper-pagination-bullet {
+      background: #4A7C59 !important;
+      opacity: 0.3;
+      width: 8px;
+      height: 8px;
+      transition: all 0.3s ease;
+    }
+    .swiper-pagination-bullet-active {
+      opacity: 1 !important;
+      width: 22px !important;
+      border-radius: 4px !important;
+    }
+
+    /* Music Disc Rotation Animation */
+    @keyframes spin-slow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spin-slow 4s linear infinite;
+      transform-origin: center;
+      transform-box: fill-box;
+    }
+    .paused {
+      animation-play-state: paused;
+    }
+  </style>
+</head>
+<body class="text-gray-800 antialiased selection:bg-themeColor selection:text-white">
+
+  <!-- Background Audio -->
+  <audio id="bg-music" loop autoplay>
+    <source src="music/nyw.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Floating Music Control Button (Bottom Right) -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button id="music-toggle" onclick="toggleMusic()" class="w-12 h-12 bg-themeColor text-white rounded-full flex items-center justify-center shadow-lg border-2 border-white focus:outline-none transition transform hover:scale-110">
+      <svg id="music-icon" class="animate-spin-slow w-6 h-6 fill-white" viewBox="0 0 24 24">
+        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Main Container -->
+  <main class="w-full min-h-screen relative overflow-hidden flex flex-col justify-between">
+
+    <!-- Top Section: Hero Image & Names -->
+    <section class="text-center px-6 pt-10 pb-6 max-w-md mx-auto w-full">
+      <p class="text-xs uppercase tracking-widest text-themeColor font-semibold mb-2">The Wedding Invitation</p>
+      <h1 class="text-3xl font-bold text-gray-900 mb-6">Mg Mg & Ma Ma</h1>
+      
+      <!-- Pre-wedding Main Photo (photo/main.jpg) -->
+      <div class="relative rounded-2xl overflow-hidden shadow-lg border-4 border-white aspect-[4/5] bg-gray-100">
+        <img src="photo/main.jpg" 
+             alt="Pre-wedding Main Photo" 
+             class="w-full h-full object-cover">
+      </div>
+    </section>
+
+    <!-- Invitation Text Section -->
+    <section class="px-8 py-4 text-center max-w-md mx-auto w-full">
+      <div class="border-y border-themeColor/20 py-6 my-2">
+        <p class="text-sm leading-relaxed text-gray-600 mb-4">
+          မင်္ဂလာနှစ်ပါး ခရီးစတင်မည့် ကျွန်ုပ်တို့၏ မင်္ဂလာဧည့်ခံပွဲသို့ မေတ္တာရှေ့ထား၍ ကြွရောက်ချီးမြှင့်ပေးပါရန် လှိုက်လှဲစွာ ဖိတ်ကြားအပ်ပါသည်။
+        </p>
+        <div class="space-y-1 text-sm font-medium text-gray-700">
+          <p>🗓 ၂၀၂၈ ခုနှစ်၊ ဖေဖော်ဝါရီလ (၂၃) ရက်</p>
+          <p>⏰ နေ့လယ် (၁၁:၀၀) နာရီ</p>
+          <p>📍 ရန်ကုန်မြို့</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Photo Album Section (7 Photos) -->
+    <section class="py-2 w-full">
+      <div class="px-6 mb-1 text-center max-w-md mx-auto">
+        <h3 class="text-sm font-semibold text-gray-700 tracking-wider uppercase">OUR GALLERY</h3>
+      </div>
+      
+      <div class="max-w-md mx-auto w-full">
+        <div class="swiper myCoverflowSwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="photo/sub1.jpg" alt="Gallery 1"></div>
+            <div class="swiper-slide"><img src="photo/sub2.jpg" alt="Gallery 2"></div>
+            <div class="swiper-slide"><img src="photo/sub3.jpg" alt="Gallery 3"></div>
+            <div class="swiper-slide"><img src="photo/sub4.jpg" alt="Gallery 4"></div>
+            <div class="swiper-slide"><img src="photo/sub5.jpg" alt="Gallery 5"></div>
+            <div class="swiper-slide"><img src="photo/sub6.jpg" alt="Gallery 6"></div>
+            <div class="swiper-slide"><img src="photo/sub7.jpg" alt="Gallery 7"></div>
+          </div>
+          <!-- Pagination Dots -->
+          <div class="swiper-pagination !relative !mt-4"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Countdown & Calendar & Map Section -->
+    <section class="px-6 py-6 max-w-md mx-auto w-full space-y-6">
+
+      <!-- 1. Countdown Timer -->
+      <div class="text-center py-2">
+        <h4 class="text-xs font-semibold tracking-widest text-themeColor uppercase mb-1">COUNTDOWN</h4>
+        <div id="countdown" class="text-sm font-bold text-gray-800">
+          <span id="days">00</span> days 
+          <span id="hours">00</span> hours 
+          <span id="minutes">00</span> min 
+          <span id="seconds">00</span> sec
+        </div>
+      </div>
+
+      <!-- 2. Calendar Card -->
+      <div class="bg-transparent text-gray-800 rounded-2xl p-6 border border-themeColor/30 shadow-sm">
+        <h3 class="text-center text-lg tracking-wider text-themeColor mb-4">February 2028</h3>
+        
+        <div class="grid grid-cols-7 text-center text-xs text-themeColor font-semibold mb-3">
+          <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+        </div>
+
+        <div class="grid grid-cols-7 text-center text-sm gap-y-3 items-center justify-items-center text-gray-700">
+          <span class="text-gray-300"></span>
+          <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
+          <span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span>
+          <span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span>
+          <span>21</span><span>22</span>
+          
+          <div class="relative flex items-center justify-center w-8 h-8">
+            <svg class="absolute inset-0 w-full h-full fill-themeColor drop-shadow-sm" viewBox="0 0 24 24">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            <span class="relative z-10 font-bold text-white text-xs">23</span>
+          </div>
+
+          <span>24</span><span>25</span><span>26</span><span>27</span>
+          <span>28</span>
+          <span class="text-gray-300"></span><span class="text-gray-300"></span><span class="text-gray-300"></span><span class="text-gray-300"></span><span class="text-gray-300"></span><span class="text-gray-300"></span>
+        </div>
+      </div>
+
+      <!-- 3. Google Map Card -->
+      <div class="bg-white/60 backdrop-blur-sm text-gray-800 rounded-2xl p-4 shadow-md border border-themeColor/30">
+        <div class="relative rounded-xl overflow-hidden h-48 shadow-inner border border-themeColor/20">
+          <iframe 
+            class="w-full h-full border-0 filter contrast-110"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d122247.9345094255!2d96.1264427181313!3d16.839097727186178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1949e223e196b%3A0x56f2b1d7d6b0d7ae!2sYangon%2C%20Myanmar%20(Burma)!5e0!3m2!1sen!2smm!4v1700000000000!5m2!1sen!2smm" 
+            allowfullscreen="" 
+            loading="lazy">
+          </iframe>
+          
+          <a href="https://maps.google.com/?q=Yangon" target="_blank" 
+             class="absolute top-3 left-3 bg-white text-gray-900 px-3 py-1.5 rounded-lg text-xs font-semibold shadow-md flex items-center gap-1.5 hover:bg-gray-100 transition">
+            Open in Maps ↗
+          </a>
+        </div>
+
+        <div class="mt-4 text-center">
+          <a href="https://maps.google.com/?q=Yangon" target="_blank" 
+             class="inline-flex items-center justify-center gap-2 text-themeColor text-sm font-medium hover:underline transition">
+            <span>🧭 Get directions</span>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Closing Section -->
+    <section class="px-6 py-8 text-center bg-gradient-to-t from-gray-50/50 to-transparent w-full">
+      <div class="max-w-md mx-auto">
+        <p class="text-xs text-gray-500 italic">"တက်ရောက်ချီးမြှင့်ပေးကြပါသော ဧည့်ပရိသတ်အပေါင်းအား ကျေးဇူးအထူးတင်ရှိပါသည်။"</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Swiper JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.myCoverflowSwiper', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      initialSlide: 3,
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 15,
+        depth: 120,
+        modifier: 2,
+        slideShadows: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+
+    // Countdown Timer Script (Target: Feb 23, 2028)
+    const weddingDate = new Date("February 23, 2028 11:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "မင်္ဂလာပွဲ အောင်မြင်စွာ ကျင်းပပြီးစီးပါပြီ";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Auto Play & Auto Rotate Script
+    const music = document.getElementById('bg-music');
+    const musicIcon = document.getElementById('music-icon');
+
+    window.addEventListener('DOMContentLoaded', () => {
+      music.play().then(() => {
+        musicIcon.classList.remove('paused');
+        musicIcon.classList.add('animate-spin-slow');
+      }).catch(error => {
+        document.addEventListener('click', function startAudio() {
+          music.play();
+          musicIcon.classList.remove('paused');
+          musicIcon.classList.add('animate-spin-slow');
+        }, { once: true });
+      });
+    });
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        musicIcon.classList.remove('paused');
+        musicIcon.classList.add('animate-spin-slow');
+      } else {
+        music.pause();
+        musicIcon.classList.remove('animate-spin-slow');
+        musicIcon.classList.add('paused');
+      }
+    }
+  </script>
+
+</body>
+</html>
