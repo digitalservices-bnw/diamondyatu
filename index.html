@@ -21,7 +21,7 @@
     }
   </script>
   <style>
-    /* Custom Font Registration (Root Path) */
+    /* Custom Font Registration */
     @font-face {
       font-family: 'CustomFont';
       src: url('fontone.ttf') format('truetype');
@@ -33,6 +33,20 @@
       font-family: 'CustomFont', sans-serif;
       background-color: #F9F6F0;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 24 24' fill='%234A7C59' opacity='0.05'%3E%3Cpath d='M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C15,20 20,13 20,8Z'/%3E%3C/svg%3E");
+      
+      /* စာသား Select လုပ်ခြင်းကို ပိတ်ရန် */
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* Main Photo Arch Shape (အပေါ်၂ထောင့် အခုံးပုံစံ၊ အောက်၂ထောင့် border rounded အသေး) */
+    .main-photo-arch {
+      border-top-left-radius: 9999px !important;
+      border-top-right-radius: 9999px !important;
+      border-bottom-left-radius: 1rem !important;
+      border-bottom-right-radius: 1rem !important;
+      overflow: hidden;
     }
 
     /* Swiper Coverflow Customization */
@@ -101,7 +115,7 @@
 </head>
 <body class="text-gray-800 antialiased selection:bg-themeColor selection:text-white">
 
-  <!-- Background Audio (Root Path) -->
+  <!-- Background Audio -->
   <audio id="bg-music" loop autoplay>
     <source src="nyw.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
@@ -121,11 +135,11 @@
 
     <!-- Top Section: Hero Image & Names -->
     <section class="text-center px-6 pt-10 pb-6 max-w-md mx-auto w-full">
-      <p class="text-xs uppercase tracking-widest text-themeColor font-semibold mb-2">The Wedding Invitation</p>
+      <p class="text-xs uppercase tracking-widest text-themeColor font-semibold mb-2">THE WEDDING INVITATION</p>
       <h1 class="text-3xl font-bold text-gray-900 mb-6">Hein Htet & Yoon Yoon</h1>
       
-      <!-- Pre-wedding Main Photo (Root Path) -->
-      <div class="relative rounded-2xl overflow-hidden shadow-lg border-4 border-white aspect-[4/5] bg-gray-100">
+      <!-- Pre-wedding Main Photo with Top Arch Shape -->
+      <div class="main-photo-arch relative shadow-lg border-4 border-white aspect-[4/5] bg-gray-100">
         <img src="main.jpg" 
              alt="Pre-wedding Main Photo" 
              class="w-full h-full object-cover">
@@ -146,7 +160,7 @@
       </div>
     </section>
 
-    <!-- Photo Album Section (Root Path) -->
+    <!-- Photo Album Section -->
     <section class="py-2 w-full">
       <div class="px-6 mb-1 text-center max-w-md mx-auto">
         <h3 class="text-sm font-semibold text-gray-700 tracking-wider uppercase">OUR GALLERY</h3>
@@ -249,6 +263,22 @@
   <!-- Swiper JS CDN -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
+    // Right-click & Inspect Protection
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (
+        e.keyCode == 123 || 
+        (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || 
+        (e.ctrlKey && e.keyCode == 85)
+      ) {
+        e.preventDefault();
+        return false;
+      }
+    });
+
     const swiper = new Swiper('.myCoverflowSwiper', {
       effect: 'coverflow',
       grabCursor: true,
